@@ -27,3 +27,38 @@ def hexagon_vertices(
         vertices.append((x, y))
 
     return vertices
+
+
+def hexagon_centers(
+    width: int,
+    height: int,
+    radius: float,
+) -> list[tuple[float, float]]:
+    """Return the centers of a hexagonal grid covering an image."""
+
+    centers = []
+
+    horizontal_spacing = 1.5 * radius
+    vertical_spacing = math.sqrt(3) * radius
+
+    column = 0
+    x = radius
+
+    while x < width:
+        # Start half a hexagon height from the top border.
+        vertical_offset = (
+            vertical_spacing / 2
+            if column % 2 == 1
+            else 0
+        )
+
+        y = vertical_spacing / 2 + vertical_offset
+
+        while y < height:
+            centers.append((x, y))
+            y += vertical_spacing
+
+        x += horizontal_spacing
+        column += 1
+
+    return centers
