@@ -1,7 +1,7 @@
 """Main PNG to SVG conversion logic."""
 
 from PIL import Image
-
+from pathlib import Path
 from png2svg.geometry import hexagon_centers, hexagon_vertices
 from png2svg.sampling import sample_color
 from png2svg.svg import svg_document, svg_polygon
@@ -48,3 +48,19 @@ def image_to_svg(
         height=image.height,
         polygons=polygons,
     )
+
+def convert_file(
+    input_path: Path,
+    output_path: Path,
+    radius: int,
+) -> None:
+    """Convert an input image file into an SVG file."""
+
+    # Open the image and make sure its pixels are represented as RGB values.
+    image = Image.open(input_path).convert("RGB")
+
+    # Reuse the main conversion logic.
+    svg_content = image_to_svg(image, radius)
+
+    # Write the generated SVG to disk.
+    output_path.write_text(svg_content, encoding="utf-8")
