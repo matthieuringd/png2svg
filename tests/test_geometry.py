@@ -1,5 +1,7 @@
-from png2svg.geometry import hexagon_vertices, hexagon_centers
 import math
+
+from png2svg.geometry import hexagon_centers, hexagon_vertices
+
 
 def test_hexagon_has_six_vertices():
     # A regular hexagon must always contain exactly six corner points.
@@ -7,6 +9,7 @@ def test_hexagon_has_six_vertices():
 
     # We only check the number of generated vertices for this first test.
     assert len(vertices) == 6
+
 
 def test_hexagon_first_vertex_is_correct():
     # With a center at (0, 0) and radius 1,
@@ -17,6 +20,7 @@ def test_hexagon_first_vertex_is_correct():
 
     assert math.isclose(x, 1.0)
     assert math.isclose(y, 0.0, abs_tol=1e-9)
+
 
 def test_hexagon_grid_contains_centers():
     # Even for a small image, the grid should generate at least one hexagon center.
@@ -41,10 +45,7 @@ def test_second_column_is_vertically_shifted():
     # Horizontal spacing between flat-top hexagons is 1.5 * radius.
     second_column_x = 10.0 + 1.5 * 10
 
-    second_column = [
-        (x, y) for x, y in centers
-        if x == second_column_x
-    ]
+    second_column = [(x, y) for x, y in centers if x == second_column_x]
 
     # Alternate columns should be shifted vertically.
     assert second_column[0][1] > 10.0

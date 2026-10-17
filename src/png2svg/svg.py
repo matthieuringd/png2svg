@@ -13,10 +13,8 @@ def svg_polygon(
     red, green, blue = color
 
     # Create one SVG polygon filled with the sampled RGB color.
-    return (
-        f'<polygon points="{points}" '
-        f'fill="rgb({red},{green},{blue})" />'
-    )
+    return f'<polygon points="{points}" fill="rgb({red},{green},{blue})" />'
+
 
 def svg_document(
     width: int,

@@ -1,6 +1,6 @@
 from PIL import Image
 
-from png2svg.converter import image_to_svg, convert_file
+from png2svg.converter import convert_file, image_to_svg
 
 
 def test_image_to_svg_returns_complete_svg():
@@ -19,6 +19,7 @@ def test_image_to_svg_returns_complete_svg():
 
     # The output should contain at least one hexagonal polygon.
     assert "<polygon" in svg
+
 
 def test_convert_file_creates_svg(tmp_path):
     # Create a small temporary PNG image.

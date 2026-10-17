@@ -1,5 +1,7 @@
 """Color sampling utilities for PNG to SVG conversion."""
 
+from typing import cast
+
 from PIL import Image
 
 
@@ -21,7 +23,8 @@ def sample_color(
         for y in range(center_y - radius, center_y + radius + 1):
             # Ignore coordinates outside the image boundaries.
             if 0 <= x < image.width and 0 <= y < image.height:
-                red, green, blue = image.getpixel((x, y))
+                pixel = cast(tuple[int, int, int], image.getpixel((x, y)))
+                red, green, blue = pixel
 
                 red_total += red
                 green_total += green
