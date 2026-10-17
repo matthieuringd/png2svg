@@ -33,6 +33,7 @@ pythonpath = ["src"]
 [tool.ruff]
 line-length = 100
 target-version = "py312"
+exclude = ["notebooks/png2svg_explorer.py"]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B"]

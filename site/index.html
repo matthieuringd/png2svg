@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-CZceb_kH.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-Bam3NpBI.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-C_DwAp7Z.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-CEsLFVD9.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-D5MAsWEG.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-C6PDArdf.woff2" as="font" type="font/woff2" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        const scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          const element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          const hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          const newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((_entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>png2svg explorer</title>
+    <script type="module" crossorigin src="./assets/index-DafnX1Xx.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/rolldown-runtime-B0Z9INg1.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-CUdNIagt.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-BQ9S8nyo.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-Dc9HkKI2.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-CKsE8sC1.js">
+    <link rel="modulepreload" crossorigin href="./assets/schemas-BL-NsLlF.js">
+    <link rel="modulepreload" crossorigin href="./assets/isObject-BCaOs5rp.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-oX0TOjjx.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-Cmx0b_zA.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-aFmHgJZY.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DnwgSs_Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseMerge-CQpUq7ep.js">
+    <link rel="modulepreload" crossorigin href="./assets/objects-snlMn4yk.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-B74pBk57.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-BdZUApHd.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-Ci2dTZ72.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-BxZgoFvi.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-B4K466FK.js">
+    <link rel="modulepreload" crossorigin href="./assets/session-DXKMv4Bs.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-CrTnjj37.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-DpGPGznL.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-DB0hHKMi.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-ldLVeaqm.js">
+    <link rel="modulepreload" crossorigin href="./assets/fullscreen-BmzAqMKq.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CyYN7zJg.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-BBdeXCvU.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-restore-focus-B98SEiGc.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-BoklZTGL.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-rHn2EdoM.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-Wea4hZ6R.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-BFOBKCJB.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-C4-_TnkF.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-BplWpfFo.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-CeQt3rdW.js">
+    <link rel="modulepreload" crossorigin href="./assets/toast-KNfsFUiB.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-DR2Z2N4w.js">
+    <link rel="modulepreload" crossorigin href="./assets/paths-CzfpItSz.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DKSBdWUf.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-BbJ1_N2T.js">
+    <link rel="modulepreload" crossorigin href="./assets/database-zap-CrkOvbyN.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-CeE3i3Qa.js">
+    <link rel="modulepreload" crossorigin href="./assets/arrays-BqUx5USx.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-Haz_uxEL.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-DsgsDslU.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-DMbg9X18.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-BDakodZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-CC89xOwH.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-yTHMxhVa.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-k9DpjH68.js">
+    <link rel="modulepreload" crossorigin href="./assets/write-secret-modal-BiG2tahJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-gbN72xHe.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-BJG-7Qob.js">
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-HclGiUj8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BczecT6V.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BTskHGpb.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-Bj3s1hGN.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-C49f7GXV.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-BPvK7C_R.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Ccyblc8N.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-B_3iMIUq.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-BHZPE0Mc.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BN-7G8qZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-DFf033uX.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CiUBikfn.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-MRn68vX1.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Bviq_Dee.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DBqBVprh.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DueXZKz9.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-CJTNBbet.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-DcnXlv0_.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-DucTwMkf.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-CYRiAeUx.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-CzugpTQu.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-DjNf4SIX.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-RyCOE8jo.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-BhJktFeI.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-DFhUGBjO.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-BeE1cdgM.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-B4VJJibu.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-DOPs2jx8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-VuyoeQOD.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-B_IYTCX5.js">
+    <link rel="modulepreload" crossorigin href="./assets/hat-glasses-DVgK5i5l.js">
+    <link rel="modulepreload" crossorigin href="./assets/package-BeYhVWvM.js">
+    <link rel="modulepreload" crossorigin href="./assets/errors-D9vyuMar.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-CNPGWpMu.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-Bq_nmf5u.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-D5bOh7g6.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-CLRkNgm7.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-PLkI_UfK.js">
+    <link rel="modulepreload" crossorigin href="./assets/filename-fxG7K_MU.js">
+    <link rel="modulepreload" crossorigin href="./assets/micromark-factory-space-D9Dr-k4J.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-YOKDWASO-CaoEAGJk.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-0PFKL3SH.css">
+    <link rel="stylesheet" crossorigin href="./assets/index--sT8xf-8.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    
+<script data-marimo="true">
+    Object.defineProperty(window, "__MARIMO_EXPORT_CONTEXT__", {
+        value: Object.freeze({
+            trusted: true,
+            notebookCode: "# /// script\n# requires-python = \"\u003E=3.12\"\n# dependencies = [\"marimo\", \"pillow\", \"png2svg @ ../public/wheels/png2svg-0.0.0%2Bmarimo.b7cf03591157-py3-none-any.whl\"]\n# ///\n\nimport marimo\n\n__generated_with = \"0.25.1\"\napp = marimo.App(width=\"medium\")\n\nwith app.setup:\n    import io\n\n    import marimo as mo\n    from PIL import Image\n\n    from png2svg.converter import image_to_svg\n\n\n@app.cell(hide_code=True)\ndef _():\n    mo.md(r\"\"\"\n    # PNG2SVG Explorer\n\n    Select an input image and choose the hexagon radius used for the conversion.\n    \"\"\")\n    return\n\n\n@app.cell\ndef _():\n    # File selector for the input image\n    image_file = mo.ui.file(\n        filetypes=[\".png\", \".jpg\", \".jpeg\"],\n        multiple=False,\n        label=\"Choose an image\",\n    )\n\n    # Slider to control the hexagon radius\n    radius = mo.ui.slider(\n        start=2,\n        stop=30,\n        value=10,\n        step=1,\n        label=\"Hexagon radius\",\n    )\n\n    mo.vstack([image_file, radius])\n    return image_file, radius\n\n\n@app.cell(hide_code=True)\ndef _(image_file, radius):\n    mo.md(\n        f\"\"\"\n        ### Current settings\n\n        **Radius:** {radius.value}\n\n        **Image selected:** {\"Yes\" if image_file.value else \"No\"}\n        \"\"\"\n    )\n    return\n\n\n@app.cell\ndef _(image_file):\n    image = None\n\n    if not image_file.value:\n        mo.md(\"No image selected yet.\")\n    else:\n        # Marimo gives us the uploaded file in memory\n        uploaded_file = image_file.value[0]\n\n        # Open it with Pillow\n        image = Image.open(io.BytesIO(uploaded_file.contents)).convert(\"RGB\")\n\n        # Display the input image\n        image\n    return (image,)\n\n\n@app.cell\ndef _(image, radius):\n    svg_text = None\n\n    if image is None:\n        svg_preview = mo.md(\"No SVG generated yet.\")\n    else:\n        # Generate the SVG from the selected image and radius\n        svg_text = image_to_svg(image, radius.value)\n        svg_preview = mo.Html(svg_text)\n\n    svg_preview\n    return (svg_text,)\n\n\n@app.cell\ndef _(radius, svg_text):\n    if svg_text is None:\n        download_button = mo.md(\"Generate an SVG first.\")\n    else:\n        download_button = mo.download(\n            data=svg_text.encode(\"utf-8\"),\n            filename=f\"output_radius_{radius.value}.svg\",\n            mimetype=\"image/svg+xml\",\n            label=\"Download SVG\",\n        )\n\n    download_button\n    return\n\n\nif __name__ == \"__main__\":\n    app.run()\n",
+        }),
+        writable: false,
+        configurable: false,
+    });
+</script>
+<marimo-code hidden="">%23%20%2F%2F%2F%20script%0A%23%20requires-python%20%3D%20%22%3E%3D3.12%22%0A%23%20dependencies%20%3D%20%5B%22marimo%22%2C%20%22pillow%22%2C%20%22png2svg%20%40%20..%2Fpublic%2Fwheels%2Fpng2svg-0.0.0%252Bmarimo.b7cf03591157-py3-none-any.whl%22%5D%0A%23%20%2F%2F%2F%0A%0Aimport%20marimo%0A%0A__generated_with%20%3D%20%220.25.1%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0Awith%20app.setup%3A%0A%20%20%20%20import%20io%0A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20from%20PIL%20import%20Image%0A%0A%20%20%20%20from%20png2svg.converter%20import%20image_to_svg%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_()%3A%0A%20%20%20%20mo.md(r%22%22%22%0A%20%20%20%20%23%20PNG2SVG%20Explorer%0A%0A%20%20%20%20Select%20an%20input%20image%20and%20choose%20the%20hexagon%20radius%20used%20for%20the%20conversion.%0A%20%20%20%20%22%22%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23%20File%20selector%20for%20the%20input%20image%0A%20%20%20%20image_file%20%3D%20mo.ui.file(%0A%20%20%20%20%20%20%20%20filetypes%3D%5B%22.png%22%2C%20%22.jpg%22%2C%20%22.jpeg%22%5D%2C%0A%20%20%20%20%20%20%20%20multiple%3DFalse%2C%0A%20%20%20%20%20%20%20%20label%3D%22Choose%20an%20image%22%2C%0A%20%20%20%20)%0A%0A%20%20%20%20%23%20Slider%20to%20control%20the%20hexagon%20radius%0A%20%20%20%20radius%20%3D%20mo.ui.slider(%0A%20%20%20%20%20%20%20%20start%3D2%2C%0A%20%20%20%20%20%20%20%20stop%3D30%2C%0A%20%20%20%20%20%20%20%20value%3D10%2C%0A%20%20%20%20%20%20%20%20step%3D1%2C%0A%20%20%20%20%20%20%20%20label%3D%22Hexagon%20radius%22%2C%0A%20%20%20%20)%0A%0A%20%20%20%20mo.vstack(%5Bimage_file%2C%20radius%5D)%0A%20%20%20%20return%20image_file%2C%20radius%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(image_file%2C%20radius)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20f%22%22%22%0A%20%20%20%20%20%20%20%20%23%23%23%20Current%20settings%0A%0A%20%20%20%20%20%20%20%20**Radius%3A**%20%7Bradius.value%7D%0A%0A%20%20%20%20%20%20%20%20**Image%20selected%3A**%20%7B%22Yes%22%20if%20image_file.value%20else%20%22No%22%7D%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(image_file)%3A%0A%20%20%20%20image%20%3D%20None%0A%0A%20%20%20%20if%20not%20image_file.value%3A%0A%20%20%20%20%20%20%20%20mo.md(%22No%20image%20selected%20yet.%22)%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%23%20Marimo%20gives%20us%20the%20uploaded%20file%20in%20memory%0A%20%20%20%20%20%20%20%20uploaded_file%20%3D%20image_file.value%5B0%5D%0A%0A%20%20%20%20%20%20%20%20%23%20Open%20it%20with%20Pillow%0A%20%20%20%20%20%20%20%20image%20%3D%20Image.open(io.BytesIO(uploaded_file.contents)).convert(%22RGB%22)%0A%0A%20%20%20%20%20%20%20%20%23%20Display%20the%20input%20image%0A%20%20%20%20%20%20%20%20image%0A%20%20%20%20return%20(image%2C)%0A%0A%0A%40app.cell%0Adef%20_(image%2C%20radius)%3A%0A%20%20%20%20svg_text%20%3D%20None%0A%0A%20%20%20%20if%20image%20is%20None%3A%0A%20%20%20%20%20%20%20%20svg_preview%20%3D%20mo.md(%22No%20SVG%20generated%20yet.%22)%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20%23%20Generate%20the%20SVG%20from%20the%20selected%20image%20and%20radius%0A%20%20%20%20%20%20%20%20svg_text%20%3D%20image_to_svg(image%2C%20radius.value)%0A%20%20%20%20%20%20%20%20svg_preview%20%3D%20mo.Html(svg_text)%0A%0A%20%20%20%20svg_preview%0A%20%20%20%20return%20(svg_text%2C)%0A%0A%0A%40app.cell%0Adef%20_(radius%2C%20svg_text)%3A%0A%20%20%20%20if%20svg_text%20is%20None%3A%0A%20%20%20%20%20%20%20%20download_button%20%3D%20mo.md(%22Generate%20an%20SVG%20first.%22)%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20download_button%20%3D%20mo.download(%0A%20%20%20%20%20%20%20%20%20%20%20%20data%3Dsvg_text.encode(%22utf-8%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20filename%3Df%22output_radius_%7Bradius.value%7D.svg%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20mimetype%3D%22image%2Fsvg%2Bxml%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20label%3D%22Download%20SVG%22%2C%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20download_button%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <script data-marimo="true">
+      Object.defineProperty(window, "__MARIMO_MOUNT_CONFIG__", {
+        value: Object.freeze({
+            "filename": "notebook.py",
+            "cwd": "",
+            "lspWorkspace": null,
+            "mode": "read",
+            "version": "0.25.1",
+            "serverToken": "unused",
+            "config": {"ai": {"allow_provider_config": true, "custom_providers": {}, "enabled": true, "models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "auto_close_pairs": true, "copilot": false, "signature_hint_on_typing": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "below", "code_editor_font_size": 14, "code_lens": true, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": true, "theme": "light"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "uv"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_csv_encoding": "utf-8", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "show_tracebacks": false, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "medium"},
+            "layout": null,
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null
+        }),
+        writable: false,
+        configurable: false,
+      });
+    </script>
+  </body>
+</html>

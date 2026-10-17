@@ -11,6 +11,7 @@ import marimo
 __generated_with = "0.25.1"
 app = marimo.App(width="medium")
 
+
 with app.setup:
     import io
 
@@ -22,25 +23,26 @@ with app.setup:
 
 @app.cell(hide_code=True)
 def _():
-    mo.md(r"""
-    # PNG2SVG Explorer
+    mo.md(
+        r"""
+        # PNG2SVG Explorer
 
-    Select an input image and choose the hexagon radius used for the
-    conversion.
-    """)
+        Select an input image and choose the hexagon radius used for the conversion.
+        """
+    )
     return
 
 
 @app.cell
 def _():
-    # File selector for the input image.
+    # File selector for the input image
     image_file = mo.ui.file(
         filetypes=[".png", ".jpg", ".jpeg"],
         multiple=False,
         label="Choose an image",
     )
 
-    # Radius controls the size of the generated hexagons.
+    # Slider to control the hexagon radius
     radius = mo.ui.slider(
         start=2,
         stop=30,
@@ -49,86 +51,72 @@ def _():
         label="Hexagon radius",
     )
 
-    mo.vstack(
-        [
-            image_file,
-            radius,
-        ]
-    )
-
-    return image_file, radius
+    mo.vstack([image_file, radius])
+    return (image_file, radius)
 
 
 @app.cell(hide_code=True)
 def _(image_file, radius):
-    mo.md(f"""
-    ### Current settings
+    mo.md(
+        f"""
+        ### Current settings
 
-    **Radius:** `{radius.value}`
+        **Radius:** {radius.value}
 
-    **Image selected:** `{"Yes" if image_file.value else "No"}`
-    """)
+        **Image selected:** {"Yes" if image_file.value else "No"}
+        """
+    )
     return
 
 
 @app.cell
-def _(image_file):
+def _(image_file, io, Image):
+    image = None
 
     if not image_file.value:
         mo.md("No image selected yet.")
     else:
-        # Get the uploaded file from Marimo.
+        # Marimo gives us the uploaded file in memory
         uploaded_file = image_file.value[0]
 
-        # Create the Pillow image that will later be used for conversion.
-        Image.open(io.BytesIO(uploaded_file.contents)).convert("RGB")
+        # Open it with Pillow
+        image = Image.open(io.BytesIO(uploaded_file.contents)).convert("RGB")
 
-        # Explicitly create a visual preview in the notebook.
-        mo.image(uploaded_file.contents)
+        # Display the input image
+        image
+
+    return (image,)
 
 
 @app.cell
-def _(image, radius):
+def _(image, radius, mo, image_to_svg):
+    svg_text = None
+
     if image is None:
-        mo.md("No SVG generated yet.")
-        svg_content = None
+        svg_preview = mo.md("No SVG generated yet.")
     else:
-        svg_content = image_to_svg(image, radius.value)
-        mo.Html(svg_content)
+        # Generate the SVG from the selected image and radius
+        svg_text = image_to_svg(image, radius.value)
+        svg_preview = mo.Html(svg_text)
 
-    return svg_content
+    svg_preview
+    return (svg_text,)
 
 
-# We make sure our conversion cell returns the SVG text
 @app.cell
-def _(image, radius):
-    if image is None:
-        pass
-    else:
-        image_to_svg(image, radius.value)
-
-
-# We display the SVG in another cell
-@app.cell
-def _(mo, svg_text):
+def _(svg_text, radius, mo):
     if svg_text is None:
-        mo.md("No SVG generated yet.")
+        download_button = mo.md("Generate an SVG first.")
     else:
-        mo.Html(svg_text)
-
-
-# Cell to add the download button
-@app.cell
-def _(mo, svg_text, radius):
-    if svg_text is None:
-        mo.md("Generate an SVG first.")
-    else:
-        mo.download(
+        download_button = mo.download(
             data=svg_text.encode("utf-8"),
             filename=f"output_radius_{radius.value}.svg",
             mimetype="image/svg+xml",
             label="Download SVG",
         )
+
+    download_button
+    return
 
 
 if __name__ == "__main__":
