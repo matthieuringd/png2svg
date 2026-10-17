@@ -1,7 +1,7 @@
 [project]
 name = "png2svg"
 version = "0.1.0"
-description = "Add your description here"
+description = "Convert raster images into scalable SVG mosaics using hexagonal color sampling."
 readme = "README.md"
 authors = [
     { name = "Matthieu Ringard", email = "matt33.ringard@gmail.com" }
