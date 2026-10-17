@@ -46,11 +46,7 @@ def hexagon_centers(
 
     while x < width:
         # Start half a hexagon height from the top border.
-        vertical_offset = (
-            vertical_spacing / 2
-            if column % 2 == 1
-            else 0
-        )
+        vertical_offset = vertical_spacing / 2 if column % 2 == 1 else 0
 
         y = vertical_spacing / 2 + vertical_offset
 

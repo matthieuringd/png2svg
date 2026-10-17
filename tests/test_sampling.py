@@ -12,6 +12,7 @@ def test_sample_color_on_uniform_image():
 
     assert color == (100, 150, 200)
 
+
 def test_sample_color_computes_average():
     # Create a 3x3 image with a black background.
     image = Image.new("RGB", (3, 3), color=(0, 0, 0))

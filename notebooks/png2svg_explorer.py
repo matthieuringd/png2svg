@@ -12,9 +12,11 @@ __generated_with = "0.25.1"
 app = marimo.App(width="medium")
 
 with app.setup:
-    import marimo as mo
     import io
+
+    import marimo as mo
     from PIL import Image
+
     from png2svg.converter import image_to_svg
 
 
@@ -54,7 +56,6 @@ def _():
         ]
     )
 
-
     return image_file, radius
 
 
@@ -69,73 +70,66 @@ def _(image_file, radius):
     """)
     return
 
+
 @app.cell
 def _(image_file):
-    image = None
 
     if not image_file.value:
-        preview = mo.md("No image selected yet.")
+        mo.md("No image selected yet.")
     else:
         # Get the uploaded file from Marimo.
         uploaded_file = image_file.value[0]
 
         # Create the Pillow image that will later be used for conversion.
-        image = Image.open(
-            io.BytesIO(uploaded_file.contents)
-        ).convert("RGB")
+        Image.open(io.BytesIO(uploaded_file.contents)).convert("RGB")
 
         # Explicitly create a visual preview in the notebook.
-        preview = mo.image(uploaded_file.contents)
-
-    preview
+        mo.image(uploaded_file.contents)
 
 
 @app.cell
 def _(image, radius):
     if image is None:
-        result = mo.md("No SVG generated yet.")
+        mo.md("No SVG generated yet.")
         svg_content = None
     else:
         svg_content = image_to_svg(image, radius.value)
-        result = mo.Html(svg_content)
+        mo.Html(svg_content)
 
-    result
     return svg_content
+
 
 # We make sure our conversion cell returns the SVG text
 @app.cell
 def _(image, radius):
     if image is None:
-        svg_text = None
+        pass
     else:
-        svg_text = image_to_svg(image, radius.value)
+        image_to_svg(image, radius.value)
 
-    svg_text
 
 # We display the SVG in another cell
 @app.cell
 def _(mo, svg_text):
     if svg_text is None:
-        svg_preview = mo.md("No SVG generated yet.")
+        mo.md("No SVG generated yet.")
     else:
-        svg_preview = mo.Html(svg_text)
+        mo.Html(svg_text)
 
-    svg_preview
 
 # Cell to add the download button
 @app.cell
 def _(mo, svg_text, radius):
     if svg_text is None:
-        download_button = mo.md("Generate an SVG first.")
+        mo.md("Generate an SVG first.")
     else:
-        download_button = mo.download(
+        mo.download(
             data=svg_text.encode("utf-8"),
             filename=f"output_radius_{radius.value}.svg",
             mimetype="image/svg+xml",
             label="Download SVG",
         )
 
-    download_button
 
 if __name__ == "__main__":
     app.run()

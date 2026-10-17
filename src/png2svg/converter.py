@@ -1,7 +1,9 @@
 """Main PNG to SVG conversion logic."""
 
-from PIL import Image
 from pathlib import Path
+
+from PIL import Image
+
 from png2svg.geometry import hexagon_centers, hexagon_vertices
 from png2svg.sampling import sample_color
 from png2svg.svg import svg_document, svg_polygon
@@ -48,6 +50,7 @@ def image_to_svg(
         height=image.height,
         polygons=polygons,
     )
+
 
 def convert_file(
     input_path: Path,
